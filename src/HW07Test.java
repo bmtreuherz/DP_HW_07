@@ -1,7 +1,7 @@
 /**
  * Created by bradl on 10/5/2016.
  */
-public class Test {
+public class HW07Test {
     public static void main(String[] args){
         simpleExample();
         verifyInvariantOnCreation();
@@ -12,7 +12,7 @@ public class Test {
 
     // Shows the output for the simple example provided in the HW instructions.
     private static void simpleExample(){
-        System.out.println("\n---------------Simple Example Test---------------");
+        System.out.println("\n---------------Simple Example HW07Test---------------");
         Component lc = new LinkedComposite( new Leaf( "A" ), new Leaf( "B" ) );
         Component ac = new ArrayComposite( new Leaf( "C" ), lc, new Leaf( "D" ) );
         ac.toString();
@@ -31,9 +31,9 @@ public class Test {
 
         // Verify the Leaf views that component as its parent.
         if(l1.getParent() != sc){
-            System.out.println("Test failed. Child should know who its parent is.\n");
+            System.out.println("HW07Test failed. Child should know who its parent is.\n");
         }else{
-            System.out.println("Test passed: Parent invariant preserved.\n");
+            System.out.println("HW07Test passed: Parent invariant preserved.\n");
         }
 
         // Verify with array composite
@@ -43,9 +43,9 @@ public class Test {
 
         // Verify the Leaf views that component as its parent.
         if(l2.getParent() != ac || sc.getParent() != ac){
-            System.out.println("Test failed. Child should know who its parent is.\n");
+            System.out.println("HW07Test failed. Child should know who its parent is.\n");
         }else{
-            System.out.println("Test passed: Parent invariant preserved.\n");
+            System.out.println("HW07Test passed: Parent invariant preserved.\n");
         }
 
         // Verify with linked composite
@@ -55,9 +55,9 @@ public class Test {
 
         // Verify the Leaf views that component as its parent.
         if(l3.getParent() != lc || ac.getParent() != lc){
-            System.out.println("Test failed. Child should know who its parent is.\n");
+            System.out.println("HW07Test failed. Child should know who its parent is.\n");
         }else{
-            System.out.println("Test passed: Parent invariant preserved.\n");
+            System.out.println("HW07Test passed: Parent invariant preserved.\n");
         }
     }
 
@@ -68,7 +68,7 @@ public class Test {
         // Create a leaf.
         Component l = new Leaf("A");
         if(l.getParent() != null){
-            System.out.println("Test failed. Child should initially have null parent.\n");
+            System.out.println("HW07Test failed. Child should initially have null parent.\n");
         }else{
             System.out.println("Check passed: Child's parent is initially null.\n");
         }
@@ -82,9 +82,9 @@ public class Test {
 
         // Verify the Leaf views that component as its parent.
         if(l.getParent() != lc){
-            System.out.println("Test failed. Child should know who its parent is.\n");
+            System.out.println("HW07Test failed. Child should know who its parent is.\n");
         }else{
-            System.out.println("Test passed: Parent invariant preserved.\n");
+            System.out.println("HW07Test passed: Parent invariant preserved.\n");
         }
 
         // W will now test this with array composites by inserting the lc into an ac.
@@ -100,9 +100,9 @@ public class Test {
 
         // Verify the child-parent invarient.
         if(lc.getParent() != ac){
-            System.out.println("Test failed. Child should know who its parent is.\n");
+            System.out.println("HW07Test failed. Child should know who its parent is.\n");
         }else{
-            System.out.println("Test passed: Parent invariant preserved.\n");
+            System.out.println("HW07Test passed: Parent invariant preserved.\n");
         }
     }
 
@@ -122,9 +122,9 @@ public class Test {
 
         // Verify the child-parent invarient.
         if(l1.getParent() != null){
-            System.out.println("Test failed. Child should not keep a reference once removed.\n");
+            System.out.println("HW07Test failed. Child should not keep a reference once removed.\n");
         }else{
-            System.out.println("Test passed: Parent invariant preserved.\n");
+            System.out.println("HW07Test passed: Parent invariant preserved.\n");
         }
 
         // Verify this again with a composite instead of a leaf.
@@ -137,9 +137,9 @@ public class Test {
 
         // Verify the child-parent invarient.
         if(ac.getParent() != null){
-            System.out.println("Test failed. Child should not keep a reference once removed.\n");
+            System.out.println("HW07Test failed. Child should not keep a reference once removed.\n");
         }else{
-            System.out.println("Test passed: Parent invariant preserved.\n");
+            System.out.println("HW07Test passed: Parent invariant preserved.\n");
         }
     }
 }

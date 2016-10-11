@@ -1,26 +1,25 @@
 /**
  * Created by bradl on 10/5/2016.
  */
-public class ArrayComposite extends Composite {
+public class ArrayComposite extends Component {
     Component[] components;
 
     public ArrayComposite(Component... components){
-        this.components = components;
+        this.components = new Component[components.length];
 
         // Set all the components parents
         for(int i=0; i<components.length; i++){
-            components[i].setParent(this);
+            super.add(components[i]);
         }
     }
 
     @Override
-    public boolean add(Component child){
+    protected boolean doAdd(Component child){
 
         // Try to find an empty space in the array
         for(int i=0; i< components.length; i++){
             if(components[i] == null){
                 components[i] = child;
-                super.add(child);
                 return true;
             }
         }
@@ -29,13 +28,12 @@ public class ArrayComposite extends Composite {
     }
 
     @Override
-    public boolean remove(Component child){
+    protected boolean doRemove(Component child){
 
         // Try to find this reference in the array
         for(int i=0; i<components.length; i++){
             if(components[i] == child){
                 components[i] = null;
-                super.remove(child);
                 return true;
             }
         }
@@ -43,17 +41,34 @@ public class ArrayComposite extends Composite {
     }
 
     @Override
-    public String toString(int depth){
-        String s = "";
-        for(int i=0; i< depth; i++){
-            s += "\t";
-        }
-        s += "ArrayComposite containing\n";
+    public Component getChild(int index){
+        // Traverse through and get the indexth child (note it may not
+        // be at the indexth position in the array as there could be holes.
+        int pos = 0;
         for(int i=0; i<components.length; i++){
             if(components[i] != null){
-                s += components[i].toString(depth + 1);
+                if(pos == index){
+                    return components[i];
+                }
+                pos++;
             }
         }
-        return s;
+        return null;
+    }
+
+    @Override
+    public int getSize(){
+        int size = 0;
+        for(int i=0; i<components.length; i++){
+            if(components[i] != null){
+                size++;
+            }
+        }
+        return size;
+    }
+
+    @Override
+    public Iter<Component> makeIter(){
+        return new CompositeIter(this);
     }
 }

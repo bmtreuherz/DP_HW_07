@@ -98,6 +98,25 @@ public class LinkedList<T> {
         return s;
     }
 
+    // Queue methods so we can use this as a FIFO queue.
+    public void enqueue(T item){
+        add(item);
+    }
+
+    public T dequeue(){
+        T result = get(0);
+        remove(0);
+        return result;
+    }
+
+    public void clear(){
+        head = null;
+        size = 0;
+    }
+
+    public boolean isEmpty(){
+        return size == 0;
+    }
 
     /* -------------------------------------------NODE CLASS---------------------------------------------------*/
     private class Node{

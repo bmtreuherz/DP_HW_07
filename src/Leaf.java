@@ -15,12 +15,4 @@ public class Leaf extends Component {
     public String getValue(){
         return this.value;
     }
-
-    public String toString(int depth){
-        String s = "";
-        for(int i=0; i<depth; i++){
-            s += "\t";
-        }
-        return s + "Leaf " + getValue() + "\n";
-    }
 }

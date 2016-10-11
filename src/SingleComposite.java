@@ -1,16 +1,16 @@
 /**
  * Created by bradl on 10/5/2016.
  */
-public class SingleComposite extends Composite {
+public class SingleComposite extends Component {
     Component child;
 
+    public SingleComposite(){}
     public SingleComposite(Component child){
-        this.child = child;
-        child.setParent(this);
+        super.add(child);
     }
 
     @Override
-    public boolean add(Component child){
+    protected boolean doAdd(Component child){
         // Check if the child can be added.
         if(this.child != null){
             return false;
@@ -18,30 +18,33 @@ public class SingleComposite extends Composite {
 
         // Set the child and call the super method.
         this.child = child;
-        super.add(child);
         return true;
     }
 
     @Override
-    public boolean remove(Component child){
+    protected boolean doRemove(Component child){
         // Check if the the reference to child is the same as the child we have.
         if(this.child == child && child!=null){
             this.child = null;
-            super.remove(child);
             return true;
         }
         return false;
     }
 
     @Override
-    public String toString(int depth){
-        String s = "";
-        for(int i=0; i< depth; i++){
-            s += "\t";
-        }
-        s += "SingleComposite containing\n";
-        s+=child.toString(depth + 1);
+    public Component getChild(int index){
+        return (index == 0) ?
+                this.child :
+                null;
+    }
 
-        return s;
+    @Override
+    public int getSize(){
+        return (child == null) ? 0 : 1;
+    }
+
+    @Override
+    public Iter<Component> makeIter(){
+        return new CompositeIter(this);
     }
 }
